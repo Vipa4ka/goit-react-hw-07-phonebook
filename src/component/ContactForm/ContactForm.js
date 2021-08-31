@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import PropTypes from "prop-types";
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
-import styles from "./ContactForm.module.scss";
-import { connect } from "react-redux";
+import styles from './ContactForm.module.scss';
+import { connect } from 'react-redux';
 
-import contactsActions from "../../redux/contacts-actions";
+import contactsOperations from '../../redux/contacts-operation';
 
 function ContactForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
 
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
 
-      case "number":
+      case 'number':
         setNumber(value);
         break;
 
@@ -29,11 +29,11 @@ function ContactForm({ onSubmit }) {
   };
 
   const reset = () => {
-    setName("");
-    setNumber("");
+    setName('');
+    setNumber('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     onSubmit(name, number);
     reset();
@@ -43,7 +43,7 @@ function ContactForm({ onSubmit }) {
     <form onSubmit={handleSubmit}>
       <div className={styles.container}>
         <label className={styles.label} htmlFor={uuidv4()}>
-          Name{" "}
+          Name{' '}
           <input
             className={styles.input}
             type="text"
@@ -81,9 +81,9 @@ ContactForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onSubmit: (name, number) =>
-    dispatch(contactsActions.addContacts(name, number)),
+    dispatch(contactsOperations.addContacts(name, number)),
 });
 
 export default connect(null, mapDispatchToProps)(ContactForm);
