@@ -12,7 +12,7 @@ import {
   deleteContactsError,
 } from './contacts-actions';
 
-axios.defaults.baseURL = 'http://localhost: 4040';
+axios.defaults.baseURL = 'http://localhost:4040';
 
 const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
@@ -36,8 +36,8 @@ const addContacts =
 
     axios
       .post('/contacts', contact)
-      .then(({ data }) => dispatch(addContactsSuccess(data)));
-    // .catch(error => dispatch(addContactsError(error)));
+      .then(({ data }) => dispatch(addContactsSuccess(data)))
+      .catch(error => dispatch(addContactsError(error)));
   };
 
 // const addContacts = ({name, number}) => async dispatch => {
