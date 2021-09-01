@@ -1,9 +1,8 @@
 import React from 'react';
-// import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import styles from './Filter.module.scss';
 import { connect } from 'react-redux';
-import { changeFilter } from '../../redux/contacts-actions';
-import contactsSelectors from '../../redux/contacts-selectors';
+import { contactsSelectors, changeFilter } from '../../redux';
 
 const Filter = ({ value, onChange }) => (
   <label className={styles.label}>
@@ -17,10 +16,10 @@ const Filter = ({ value, onChange }) => (
   </label>
 );
 
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   value: contactsSelectors.getFilter(state),

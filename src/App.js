@@ -1,12 +1,15 @@
 import ContactForm from './component/ContactForm';
 import Filter from './component/Filter';
 import ContactList from './component/ContactList';
-// import contactsOperations from "./redux/contacts-operation";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { contactsOperations } from './redux';
+import { connect } from 'react-redux';
 
 function App() {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
+  useEffect(() => dispatch(contactsOperations.fetchContacts()), [dispatch]);
   return (
     <>
       <div>
@@ -20,9 +23,9 @@ function App() {
   );
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
-// });
-// export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
+});
+export default connect(null, mapDispatchToProps)(App);
 
-export default App;
+// export default App;

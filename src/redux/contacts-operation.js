@@ -27,34 +27,20 @@ const fetchContacts = () => async dispatch => {
 
 const addContacts =
   ({ name, number }) =>
-  dispatch => {
+  async dispatch => {
     const contact = {
       name,
       number,
     };
     dispatch(addContactsRequest());
 
-    axios
-      .post('/contacts', contact)
-      .then(({ data }) => dispatch(addContactsSuccess(data)))
-      .catch(error => dispatch(addContactsError(error)));
+    try {
+      const { data } = await axios.post('/contacts', contact);
+      dispatch(addContactsSuccess(data));
+    } catch (error) {
+      dispatch(addContactsError(error));
+    }
   };
-
-// const addContacts = ({name, number}) => async dispatch => {
-//     const contact = {
-//         name,
-//         number,
-//     };
-//     dispatch(addContactsRequest());
-
-//     try {
-//         const { data } = await axios.post('/contacts', contact);
-//         dispatch(addContactsSuccess(data));
-
-//     } catch (error) {
-//         dispatch(addContactsError(error));
-//     };
-// };
 
 const deleteContacts = id => async dispatch => {
   dispatch(deleteContactsRequest());
